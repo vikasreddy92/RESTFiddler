@@ -1,0 +1,105 @@
+<resources>
+    <string name="app_name">REST Fiddler</string>
+    <string name="enter_url_here">Enter URL here</string>
+    <string name="post">POST</string>
+    <string name="get">GET</string>
+    <string name="put">PUT</string>
+    <string name="delete">DELETE</string>
+    <string name="query_params">Query params</string>
+    <string name="headers">Headers</string>
+    <string name="body">Body</string>
+    <string name="key">Key</string>
+    <string name="value">Value</string>
+    <string name="remove_query_parameter_description">Remove this query parameter</string>
+
+    <string-array name="http_headers">
+        <item> Accept </item>
+        <item> Accept-Charset </item>
+        <item> Accept-Encoding </item>
+        <item> Accept-Language </item>
+        <item> Accept-Ranges </item>
+        <item> Access-Control-Allow-Credentials </item>
+        <item> Access-Control-Allow-Headers </item>
+        <item> Access-Control-Allow-Methods </item>
+        <item> Access-Control-Allow-Origin </item>
+        <item> Access-Control-Expose-Headers </item>
+        <item> Access-Control-Max-Age </item>
+        <item> Access-Control-Request-Headers </item>
+        <item> Access-Control-Request-Method </item>
+        <item> Age </item>
+        <item> Allow </item>
+        <item> Alt-Svc </item>
+        <item> Authorization </item>
+        <item> Cache-Control </item>
+        <item> Clear-Site-Data </item>
+        <item> Connection </item>
+        <item> Content-Disposition </item>
+        <item> Content-Encoding </item>
+        <item> Content-Language </item>
+        <item> Content-Length </item>
+        <item> Content-Location </item>
+        <item> Content-Range </item>
+        <item> Content-Security-Policy </item>
+        <item> Content-Security-Policy-Report-Only </item>
+        <item> Content-Type </item>
+        <item> Cookie </item>
+        <item> Cookie2 </item>
+        <item> DNT </item>
+        <item> Date </item>
+        <item> ETag </item>
+        <item> Early-Data </item>
+        <item> Expect </item>
+        <item> Expect-CT </item>
+        <item> Expires </item>
+        <item> Feature-Policy </item>
+        <item> Forwarded </item>
+        <item> From </item>
+        <item> Host </item>
+        <item> If-Match </item>
+        <item> If-Modified-Since </item>
+        <item> If-None-Match </item>
+        <item> If-Range </item>
+        <item> If-Unmodified-Since </item>
+        <item> Index </item>
+        <item> Keep-Alive </item>
+        <item> Large-Allocation </item>
+        <item> Last-Modified </item>
+        <item> Location </item>
+        <item> Origin </item>
+        <item> Pragma </item>
+        <item> Proxy-Authenticate </item>
+        <item> Proxy-Authorization </item>
+        <item> Public-Key-Pins </item>
+        <item> Public-Key-Pins-Report-Only </item>
+        <item> Range </item>
+        <item> Referer </item>
+        <item> Referrer-Policy </item>
+        <item> Retry-After </item>
+        <item> Sec-WebSocket-Accept </item>
+        <item> Server </item>
+        <item> Server-Timing </item>
+        <item> Set-Cookie </item>
+        <item> Set-Cookie2 </item>
+        <item> SourceMap </item>
+        <item> Strict-Transport-Security </item>
+        <item> TE </item>
+        <item> Timing-Allow-Origin </item>
+        <item> Tk </item>
+        <item> Trailer </item>
+        <item> Transfer-Encoding </item>
+        <item> Upgrade-Insecure-Requests </item>
+        <item> User-Agent </item>
+        <item> Vary </item>
+        <item> Via </item>
+        <item> WWW-Authenticate </item>
+        <item> Warning </item>
+        <item> X-Content-Type-Options </item>
+        <item> X-DNS-Prefetch-Control </item>
+        <item> X-Forwarded-For </item>
+        <item> X-Forwarded-Host </item>
+        <item> X-Forwarded-Proto </item>
+        <item> X-Frame-Options </item>
+        <item> X-XSS-Protection </item>
+    </string-array>
+
+</resources>

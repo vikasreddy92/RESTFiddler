@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/main_layout"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true"
+    tools:context=".MainActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        style="@style/DarkToolBar"
+        app:title="@string/app_name"
+        android:elevation="4dp">
+
+    </android.support.v7.widget.Toolbar>
+
+    <EditText
+        android:id="@+id/et_url"
+        android:imeOptions="flagNoExtractUi"
+        android:layout_width="match_parent"
+        android:layout_below="@id/toolbar"
+        android:layout_marginTop="5dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/enter_url_here"
+        android:inputType="textUri"/>
+
+    <RadioGroup
+        android:id="@+id/method"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/et_url"
+        android:layout_centerHorizontal="true"
+        android:padding="5dp"
+        android:layout_marginTop="10dp"
+        android:clickable="false"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rb_get"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/get" />
+
+        <RadioButton
+            android:id="@+id/rb_post"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/post" />
+
+        <RadioButton
+            android:id="@+id/rb_put"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/put" />
+
+        <RadioButton
+            android:id="@+id/rb_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/delete" />
+
+    </RadioGroup>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/method">
+    </android.support.v4.widget.NestedScrollView>
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tl_params"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_below="@+id/method"
+        android:layout_marginTop="5dp"
+        android:background="@color/colorPrimary"
+        android:elevation="5dp"
+        android:padding="5dp"
+        app:tabTextColor="@color/colorWhite">
+
+        <android.support.design.widget.TabItem
+            android:id="@+id/ti_headers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/headers" />
+
+        <android.support.design.widget.TabItem
+            android:id="@+id/ti_query_params"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/query_params" />
+
+        <android.support.design.widget.TabItem
+            android:id="@+id/ti_body"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/body" />
+    </android.support.design.widget.TabLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tl_params" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_send"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="15dp"
+        android:src="@android:drawable/ic_menu_send"
+        app:elevation="12dp"
+        app:fabSize="normal" />
+</RelativeLayout>
