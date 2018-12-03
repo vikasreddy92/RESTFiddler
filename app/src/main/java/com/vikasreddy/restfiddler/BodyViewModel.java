@@ -36,6 +36,13 @@ public class BodyViewModel extends ViewModel {
         }
     }
 
+    ArrayList<Param> toList() {
+        ArrayList<Param> params = this.bodyParams.getValue();
+        assert params != null;
+        params.remove(new Param("", ""));
+        return params;
+    }
+
     public int size() {
         return Objects.requireNonNull(this.bodyParams.getValue()).size();
     }

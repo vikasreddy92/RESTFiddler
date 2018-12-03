@@ -1,5 +1,9 @@
 package com.vikasreddy.restfiddler;
 
+import android.content.Context;
+import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -18,8 +22,11 @@ import android.widget.RelativeLayout;
 import java.util.List;
 import java.util.Map;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class MainActivity
@@ -82,7 +89,10 @@ public class MainActivity
                 Log.d(TAG, "onClick: qPVM: " + i + ") " + queryParamsViewModel.get(i).key + ", " + queryParamsViewModel.get(i).value);
             }
             Snackbar.make(mainLayout, "Sending request", Snackbar.LENGTH_SHORT).show();
-            makeRequest();
+
+            Intent intent = new Intent(getApplicationContext(), ResponseActivity.class);
+            intent.putExtra(Constants.REQUEST, getParcelableRequest());
+            startActivity(intent);
         }
     };
 
@@ -126,67 +136,17 @@ public class MainActivity
     }
     //endregion
 
-    class MakeRequest extends AsyncTask<Request, Integer, Long> {
-        OkHttpClient httpClient = new OkHttpClient();
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        @Override
-        protected Long doInBackground(Request... requests) {
-            try {
-                Response response = httpClient.newCall(requests[0]).execute();
-                Log.d(TAG, "makeRequest: Response Status code: " + response.code());
-                Log.d(TAG, "makeRequest: Response Headers:\n");
-                for (Map.Entry<String, List<String>> entry:response.headers().toMultimap().entrySet()) {
-                    Log.d(TAG, "makeRequest: " + entry.getKey() + " -> " + entry.getValue().toString());
-                }
-                Log.d(TAG, "makeRequest: " + response.body().string());
-            } catch (Exception e) {
-                Log.d(TAG, "doInBackground: ", e);
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Long aLong) {
-            super.onPostExecute(aLong);
-        }
-
-        @Override
-        protected void onProgressUpdate(Integer... values) {
-            super.onProgressUpdate(values);
-        }
-    }
-    private void makeRequest()
-    {
-        StringBuilder url = new StringBuilder(etUrl.getText().toString());
-        String method = getMethod().toUpperCase();
+    private ParcelableRequest getParcelableRequest() {
+        ParcelableRequest parcelableRequest = null;
         try {
-            Request.Builder request = new Request.Builder();
-            request.get();
-            if(headersViewModel != null && headersViewModel.size() > 0)
-            for (Param p: headersViewModel.toList()) {
-                request.addHeader(p.key, p.value);
-            }
-            url.append('?');
-            if(queryParamsViewModel != null && queryParamsViewModel.size() > 0)
-                for (Param p: queryParamsViewModel.toList()) {
-                url.append(p.key);
-                url.append('=');
-                url.append(p.value);
-                url.append('&');
-            }
-            request.url(url.toString());
-            new MakeRequest().execute(request.build());
+            String url = etUrl.getText().toString();
+            String method = getMethod().toUpperCase();
+            parcelableRequest = new ParcelableRequest(url, method, this.headersViewModel
+                    , this.queryParamsViewModel, this.bodyViewModel);
         } catch (Exception e) {
-            Log.d(TAG, "makeRequest: ", e);
+            Log.d(TAG, "getParcelableRequest: ", e);
         }
-    }
-
-    private void getRequest(String url) {
-
+        return parcelableRequest;
     }
 
     private String getMethod() {

@@ -96,12 +96,12 @@ public class RequestTask extends AsyncTask<Request, Integer, RequestTask.Result>
         Response response;
         Exception exception;
 
-        Result(Response response) {
-            this.response = response;
+        Result(Response responseObj) {
+            response = responseObj;
         }
 
-        Result(Exception exception) {
-            this.exception = exception;
+        Result(Exception exceptionObj) {
+            exception = exceptionObj;
         }
     }
 }
