@@ -21,6 +21,7 @@ public class NetworkFragment extends Fragment {
 
     public static NetworkFragment getInstance(FragmentManager fragmentManager
             , ParcelableRequest parcelableRequest) {
+
         NetworkFragment networkFragment = (NetworkFragment) fragmentManager
                 .findFragmentByTag(NetworkFragment.TAG);
 
@@ -64,6 +65,7 @@ public class NetworkFragment extends Fragment {
 
     public void startRequest() {
         requestTask = new RequestTask(requestCallback);
+        parcelableRequest = getArguments().getParcelable(Constants.REQUEST);
         Request request = populateRequest(parcelableRequest);
         requestTask.execute(request);
     }

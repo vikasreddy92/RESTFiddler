@@ -8,7 +8,6 @@ import java.util.Objects;
 
 public class BodyViewModel extends ViewModel {
 
-
     private MutableLiveData<ArrayList<Param>> bodyParams;
 
     public BodyViewModel() {

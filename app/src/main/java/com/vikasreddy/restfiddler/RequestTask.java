@@ -32,15 +32,6 @@ public class RequestTask extends AsyncTask<Request, Integer, RequestTask.Result>
             }
             Response response = httpClient.newCall(requests[0]).execute();
             result = new Result(response);
-
-            Log.d(TAG, "doInBackground: Response Status code: " + response.code());
-            Log.d(TAG, "doInBackground: Response Headers:\n");
-            for (Map.Entry<String, List<String>> entry:response.headers().toMultimap().entrySet()) {
-                Log.d(TAG, "doInBackground: " + entry.getKey() + " -> " + entry.getValue().toString());
-            }
-            if(response.body() != null) {
-                Log.d(TAG, "doInBackground: " + response.body().string());
-            }
         } catch (Exception e) {
             result = new Result(e);
             Log.d(TAG, "doInBackground: ", e);
@@ -69,9 +60,9 @@ public class RequestTask extends AsyncTask<Request, Integer, RequestTask.Result>
         super.onPostExecute(result);
         if (result != null && requestCallback != null) {
             if (result.exception != null) {
-                requestCallback.updateFromRequest(result.exception.getMessage());
+                requestCallback.updateFromRequest(result);
             } else if (result.response != null) {
-                requestCallback.updateFromRequest(result.response);
+                requestCallback.updateFromRequest(result);
             }
             requestCallback.finishDownloading();
         }

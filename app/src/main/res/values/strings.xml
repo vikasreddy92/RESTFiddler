@@ -11,6 +11,11 @@
     <string name="key">Key</string>
     <string name="value">Value</string>
     <string name="remove_query_parameter_description">Remove this query parameter</string>
+    <string name="response_activity_name">RESTFiddler - Response</string>
+    <string name="request">Request</string>
+    <string name="response">Response</string>
+    <string name="cookies">Cookies</string>
+    <string name="loading">Loading</string>
 
     <string-array name="http_headers">
         <item> Accept </item>

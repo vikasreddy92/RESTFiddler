@@ -2,24 +2,54 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/response_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/response_container"
-    tools:context=".ResponseActivity">
+    tools:context=".ResponseActivity"
+    android:theme="@style/AppTheme">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:elevation="4dp"
         android:background="@color/colorPrimary"
-        app:title="@string/app_name" />
+        android:elevation="4dp"
+        app:title="@string/response_activity_name" />
 
-<TextView
-    android:id="@+id/tvResponse"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_below="@id/toolbar"
-    android:textIsSelectable="true"/>
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tl_response"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar"
+        android:elevation="5dp"
+        android:background="@color/colorPrimary"
+        app:tabTextColor="@color/colorWhite">
+
+        <android.support.design.widget.TabItem
+            android:id="@+id/ti_response_body"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/body" />
+
+        <android.support.design.widget.TabItem
+            android:id="@+id/ti_response_cookies"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/cookies" />
+
+        <android.support.design.widget.TabItem
+            android:id="@+id/ti_response_headers"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/headers" />
+    </android.support.design.widget.TabLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_response"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tl_response">
+
+    </android.support.v4.view.ViewPager>
 
 </RelativeLayout>

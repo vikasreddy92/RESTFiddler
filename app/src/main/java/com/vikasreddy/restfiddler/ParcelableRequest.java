@@ -2,9 +2,12 @@ package com.vikasreddy.restfiddler;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import okhttp3.Request;
 
 public class ParcelableRequest implements Parcelable {
     private String url;
@@ -20,6 +23,10 @@ public class ParcelableRequest implements Parcelable {
         this.headers = populateHeaders(headersViewModel);
         this.bodyParameters = populateBody(bodyViewModel);
         this.queryParameters = populateQueryParams(queryParamsViewModel);
+    }
+
+    ParcelableRequest(Request request) {
+
     }
 
     private HashMap<String,String> populateQueryParams(QueryParamsViewModel queryParamsViewModel) {
@@ -68,7 +75,7 @@ public class ParcelableRequest implements Parcelable {
     }
 
     //region Getters and Setters
-    public String getUrl() {
+    String getUrl() {
         return url;
     }
 
@@ -92,7 +99,7 @@ public class ParcelableRequest implements Parcelable {
         this.headers = headers;
     }
 
-    public HashMap<String, String> getBodyParameters() {
+    HashMap<String, String> getBodyParameters() {
         return bodyParameters;
     }
 
@@ -100,7 +107,7 @@ public class ParcelableRequest implements Parcelable {
         this.bodyParameters = bodyParameters;
     }
 
-    public HashMap<String, String> getQueryParameters() {
+    HashMap<String, String> getQueryParameters() {
         return queryParameters;
     }
 
@@ -143,5 +150,32 @@ public class ParcelableRequest implements Parcelable {
         dest.writeSerializable(headers);
         dest.writeSerializable(queryParameters);
         dest.writeSerializable(bodyParameters);
+    }
+
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "\nURL: " + this.url
+                + "\nMethod: " + this.method
+                + "\nQuery Methods\n"
+                + getMapString(this.queryParameters)
+                + "\nHeaders\n"
+                + getMapString(this.headers)
+                + "\nParameters\n"
+                + getMapString(this.bodyParameters);
+    }
+
+    private String getMapString(HashMap<String, String> map) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for(Map.Entry<String, String> entry : map.entrySet() ) {
+            stringBuilder.append("Key: ");
+            stringBuilder.append(entry.getKey());
+            stringBuilder.append('\t');
+            stringBuilder.append("Value: ");
+            stringBuilder.append(entry.getValue());
+            stringBuilder.append('\n');
+        }
+        return stringBuilder.toString();
     }
 }
