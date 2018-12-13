@@ -5,9 +5,6 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import java.util.List;
-import java.util.Map;
-
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -25,24 +22,21 @@ public class RequestTask extends AsyncTask<Request, Integer, RequestTask.Result>
 
     @Override
     protected RequestTask.Result doInBackground(Request... requests) {
-        Result result = null;
         try {
             if(requests == null) {
-                result.exception = new Exception("Request is null");
+                return new Result(new Exception("Request is null"));
             }
             Response response = httpClient.newCall(requests[0]).execute();
-            result = new Result(response);
+            return new Result(response);
         } catch (Exception e) {
-            result = new Result(e);
             Log.d(TAG, "doInBackground: ", e);
+            return new Result(e);
         }
-        return result;
     }
 
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-
         if (requestCallback != null) {
             NetworkInfo networkInfo = requestCallback.getActiveNetworkInfo();
             if (networkInfo == null

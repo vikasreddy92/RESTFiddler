@@ -26,14 +26,12 @@ public class ResponseActivity
         extends AppCompatActivity
         implements RequestCallback {
     private static final String TAG = "ResponseActivity";
-    private RelativeLayout mMainView;
     private NetworkFragment networkFragment;
     private boolean isRequestInProgress = false;
     private String body;
 
-    private TabLayout tlResponse;
+    private RelativeLayout mMainView;
     private ViewPager viewPager;
-    private ResponsePageAdapter responsePageAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,12 +44,11 @@ public class ResponseActivity
     private void initUI(ParcelableResponse response) {
         setContentView(R.layout.activity_response);
         this.mMainView = findViewById(R.id.response_container);
-        this.tlResponse = findViewById(R.id.tl_response);
         this.viewPager = findViewById(R.id.vp_response);
-        this.tlResponse.addOnTabSelectedListener(tabSelectedListener);
-        responsePageAdapter =
-                new ResponsePageAdapter(getSupportFragmentManager()
-                        , tlResponse.getTabCount(), response);
+        TabLayout tlResponse = findViewById(R.id.tl_response);
+        tlResponse.addOnTabSelectedListener(tabSelectedListener);
+        ResponsePageAdapter responsePageAdapter = new ResponsePageAdapter(getSupportFragmentManager()
+                , tlResponse.getTabCount(), response);
         viewPager.setAdapter(responsePageAdapter);
         viewPager.setOffscreenPageLimit(3);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tlResponse));

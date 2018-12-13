@@ -87,7 +87,6 @@ public class NetworkFragment extends Fragment {
             } else if (method.equalsIgnoreCase("post")) {
                 MultipartBody.Builder multiPartBodyBuilder = new MultipartBody.Builder()
                         .setType(MultipartBody.FORM);
-
                 if (parcelableRequest.getBodyParameters() != null
                         && parcelableRequest.getBodyParameters().size() > 0) {
                     for (Map.Entry<String, String> p : parcelableRequest.getBodyParameters().entrySet()) {
@@ -95,8 +94,28 @@ public class NetworkFragment extends Fragment {
                     }
                 }
                 requestBuilder.post(multiPartBodyBuilder.build());
+            } else if(method.equalsIgnoreCase("put")){
+                MultipartBody.Builder multiPartBodyBuilder = new MultipartBody.Builder()
+                        .setType(MultipartBody.FORM);
+                if (parcelableRequest.getBodyParameters() != null
+                        && parcelableRequest.getBodyParameters().size() > 0) {
+                    for (Map.Entry<String, String> p : parcelableRequest.getBodyParameters().entrySet()) {
+                        multiPartBodyBuilder.addFormDataPart(p.getKey(), p.getValue());
+                    }
+                }
+                requestBuilder.put(multiPartBodyBuilder.build());
+            } else if(method.equalsIgnoreCase("delete")) {
+                MultipartBody.Builder multiPartBodyBuilder = new MultipartBody.Builder()
+                        .setType(MultipartBody.FORM);
+                if (parcelableRequest.getBodyParameters() != null
+                        && parcelableRequest.getBodyParameters().size() > 0) {
+                    for (Map.Entry<String, String> p : parcelableRequest.getBodyParameters().entrySet()) {
+                        multiPartBodyBuilder.addFormDataPart(p.getKey(), p.getValue());
+                    }
+                }
+                requestBuilder.delete(multiPartBodyBuilder.build());
             } else {
-                Log.d(TAG, "createRequest: Mehotd [" + method + "] not supported.");
+                Log.d(TAG, "createRequest: Method [ " + method + " ] not supported.");
                 request = null;
             }
 

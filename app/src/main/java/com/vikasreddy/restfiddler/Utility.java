@@ -4,9 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Utility {
+class Utility {
 
-    public static String getMapString(Map<String, String> map) {
+    static String getMapString(Map<String, String> map) {
         return Utility.getHashMapString(toHashMap(map));
     }
 

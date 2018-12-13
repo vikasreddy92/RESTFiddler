@@ -26,7 +26,9 @@ public class ParcelableRequest implements Parcelable {
     }
 
     ParcelableRequest(Request request) {
-
+        this.url = request.url().toString();
+        this.method = request.method();
+        this.headers = request.headers().toMultimap();
     }
 
     private HashMap<String,String> populateQueryParams(QueryParamsViewModel queryParamsViewModel) {
@@ -76,7 +78,7 @@ public class ParcelableRequest implements Parcelable {
 
     //region Getters and Setters
     String getUrl() {
-        return url;
+        return this.url;
     }
 
     public void setUrl(String url) {
@@ -84,7 +86,7 @@ public class ParcelableRequest implements Parcelable {
     }
 
     public String getMethod() {
-        return method;
+        return this.method;
     }
 
     public void setMethod(String method) {
@@ -151,7 +153,6 @@ public class ParcelableRequest implements Parcelable {
         dest.writeSerializable(queryParameters);
         dest.writeSerializable(bodyParameters);
     }
-
 
     @NonNull
     @Override

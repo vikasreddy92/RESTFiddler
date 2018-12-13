@@ -1,33 +1,18 @@
 package com.vikasreddy.restfiddler;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.os.AsyncTask;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.design.widget.TabItem;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
-
-import java.util.List;
-import java.util.Map;
-
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
 
 public class MainActivity
         extends AppCompatActivity
@@ -58,12 +43,13 @@ public class MainActivity
         etUrl = findViewById(R.id.et_url);
         rbMethodGroup = findViewById(R.id.method);
         rbGetMethod = findViewById(R.id.rb_get);
+        viewPager = findViewById(R.id.view_pager);
         TabLayout tabLayout = findViewById(R.id.tl_params);
         FloatingActionButton fabSend = findViewById(R.id.fab_send);
-        viewPager = findViewById(R.id.view_pager);
 
         fabSend.setOnClickListener(fabSendOnClickListener);
         tabLayout.addOnTabSelectedListener(tabSelectedListener);
+
         PageAdapter pageAdapter = new PageAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(pageAdapter);
         viewPager.setOffscreenPageLimit(3);
@@ -75,18 +61,26 @@ public class MainActivity
         @Override
         public void onClick(View v) {
             if(bodyViewModel != null)
-            for (int i = 0; i < bodyViewModel.size(); i++) {
-                Log.d(TAG, "onClick: bVM: " + i + ") " + bodyViewModel.get(i).key + ", " + bodyViewModel.get(i).value);
+            {
+                for (int i = 0; i < bodyViewModel.size(); i++) {
+                    Log.d(TAG, "onClick: bodyViewModel: " + i + ") "
+                            + bodyViewModel.get(i).key + ", " + bodyViewModel.get(i).value);
+                }
             }
-
             if(headersViewModel != null)
-            for (int i = 0; i < headersViewModel.size(); i++) {
-                Log.d(TAG, "onClick: hVM: " + i + ") " + headersViewModel.get(i).key + ", " + headersViewModel.get(i).value);
+            {
+                for (int i = 0; i < headersViewModel.size(); i++) {
+                    Log.d(TAG, "onClick: headersViewModel: " + i + ") "
+                            + headersViewModel.get(i).key + ", " + headersViewModel.get(i).value);
+                }
             }
-
             if(queryParamsViewModel != null)
-            for (int i = 0; i < queryParamsViewModel.size(); i++) {
-                Log.d(TAG, "onClick: qPVM: " + i + ") " + queryParamsViewModel.get(i).key + ", " + queryParamsViewModel.get(i).value);
+            {
+                for (int i = 0; i < queryParamsViewModel.size(); i++) {
+                    Log.d(TAG, "onClick: queryParamsViewModel: " + i + ") "
+                            + queryParamsViewModel.get(i).key + ", "
+                            + queryParamsViewModel.get(i).value);
+                }
             }
             Snackbar.make(mainLayout, "Sending request", Snackbar.LENGTH_SHORT).show();
 
