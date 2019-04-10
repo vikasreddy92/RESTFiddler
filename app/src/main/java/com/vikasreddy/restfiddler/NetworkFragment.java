@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
 
+import java.util.List;
 import java.util.Map;
 
 import okhttp3.MultipartBody;
@@ -120,8 +121,8 @@ public class NetworkFragment extends Fragment {
             }
 
             if (parcelableRequest.getHeaders() != null && parcelableRequest.getHeaders().size() > 0) {
-                for (Map.Entry<String, String> p : parcelableRequest.getHeaders().entrySet()) {
-                    requestBuilder.addHeader(p.getKey(), p.getValue());
+                for (Map.Entry<String, List<String>> p : parcelableRequest.getHeaders().entrySet()) {
+                    requestBuilder.addHeader(p.getKey(), Utility.toStringWithSeparator(p.getValue(), ";"));
                 }
             }
 

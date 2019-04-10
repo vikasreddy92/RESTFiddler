@@ -4,7 +4,9 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import okhttp3.Request;
@@ -12,7 +14,7 @@ import okhttp3.Request;
 public class ParcelableRequest implements Parcelable {
     private String url;
     private String method;
-    private HashMap<String, String> headers;
+    private Map<String, List<String>> headers;
     private HashMap<String, String> bodyParameters;
     private HashMap<String, String> queryParameters;
 
@@ -61,16 +63,18 @@ public class ParcelableRequest implements Parcelable {
         return map;
     }
 
-    private HashMap<String,String> populateHeaders(HeadersViewModel headersViewModel) {
-        HashMap<String, String> map = new HashMap<>();
+    private Map<String, List<String>> populateHeaders(HeadersViewModel headersViewModel) {
+        Map<String, List<String>> map = new HashMap<>();
         if(headersViewModel == null) {
             return map;
         }
         for(Param param : headersViewModel.toList()) {
             if(map.containsKey(param.key)) {
-                //throw error
+                map.get(param.key).add(param.value);
             } else {
-                map.put(param.key, param.value);
+                List<String> list = new ArrayList<>();
+                list.add(param.value);
+                map.put(param.key, list);
             }
         }
         return map;
@@ -93,11 +97,11 @@ public class ParcelableRequest implements Parcelable {
         this.method = method;
     }
 
-    public HashMap<String, String> getHeaders() {
+    public Map<String, List<String>> getHeaders() {
         return headers;
     }
 
-    public void setHeaders(HashMap<String, String> headers) {
+    public void setHeaders(Map<String, List<String>> headers) {
         this.headers = headers;
     }
 
@@ -123,7 +127,7 @@ public class ParcelableRequest implements Parcelable {
     private ParcelableRequest(Parcel in) {
         this.url = in.readString();
         this.method = in.readString();
-        this.headers = (HashMap<String, String>) in.readSerializable();
+        this.headers = (Map<String, List<String>>) in.readSerializable();
         this.queryParameters = (HashMap<String, String>) in.readSerializable();
         this.bodyParameters = (HashMap<String, String>) in.readSerializable();
     }
@@ -149,7 +153,7 @@ public class ParcelableRequest implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(url);
         dest.writeString(method);
-        dest.writeSerializable(headers);
+        dest.writeSerializable((HashMap)headers);
         dest.writeSerializable(queryParameters);
         dest.writeSerializable(bodyParameters);
     }
@@ -175,6 +179,19 @@ public class ParcelableRequest implements Parcelable {
             stringBuilder.append('\t');
             stringBuilder.append("Value: ");
             stringBuilder.append(entry.getValue());
+            stringBuilder.append('\n');
+        }
+        return stringBuilder.toString();
+    }
+
+    private String getMapString(Map<String, List<String>> map) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for(Map.Entry<String, List<String>> entry : map.entrySet() ) {
+            stringBuilder.append("Key: ");
+            stringBuilder.append(entry.getKey());
+            stringBuilder.append('\t');
+            stringBuilder.append("Value: ");
+            stringBuilder.append(entry.getValue().toString());
             stringBuilder.append('\n');
         }
         return stringBuilder.toString();

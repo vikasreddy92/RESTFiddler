@@ -52,4 +52,13 @@ class Utility {
         }
         return stringBuilder.toString();
     }
+
+    public static String toStringWithSeparator(List<String> list, String sep) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (String str: list) {
+            stringBuilder.append(str);
+            stringBuilder.append(sep);
+        }
+        return stringBuilder.substring(0, stringBuilder.length() - 1);
+    }
 }
